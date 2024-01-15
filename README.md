@@ -6,7 +6,9 @@ The Predictor1
 
 -Used SVR next -> Did a gridsearch to find the best gamma and C and implemented it to  predict the values
 
-Present- MSE-1519.004
+Present- 
+
+         MSE-1519.004
 
          RMSE-38.97
          
