@@ -1,4 +1,4 @@
-# GoldPricePredictor
+# GoldPricePredictor\n
 
 The Predictor1
 -implements Linear Regression,Ridge and Lasso initially but found out they were having same grah because of hyperparameters and limited featiures
