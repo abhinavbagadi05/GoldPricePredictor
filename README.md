@@ -1,6 +1,6 @@
-# GoldPricePredictor\n
+# GoldPricePredictor
 
-The Predictor1
+The Predictor1 \n
 -implements Linear Regression,Ridge and Lasso initially but found out they were having same grah because of hyperparameters and limited featiures
 -Used SVR next -> Did a gridsearch to find the best gamma and C and implemented it to  predict the values
 Present- MSE-1519.004
