@@ -36,32 +36,32 @@ y = gold_data['Close']
 X = np.arange(len(y)).reshape(-1, 1)  # Using the index as a feature for simplicity
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
 
-# # Linear Regression
-# lr = LinearRegression()
-# lr.fit(X_train, y_train)
-# pred_lr = lr.predict(X)
-# calculate_metrics(y, pred_lr)
-# plot_actual_vs_predicted(y, pred_lr, 'Linear Regression')
-#
-# # Lasso
-# la = Lasso()
-# la.fit(X_train, y_train)
-# pred_la = la.predict(X)
-# calculate_metrics(y, pred_la)
-# plot_actual_vs_predicted(y, pred_la, 'Lasso')
-#
-# # Ridge
-# ri = Ridge()
-# ri.fit(X_train, y_train)
-# pred_ri = ri.predict(X)
-# calculate_metrics(y, pred_ri)
-# plot_actual_vs_predicted(y, pred_ri, 'Ridge')
+# Linear Regression
+lr = LinearRegression()
+lr.fit(X_train, y_train)
+pred_lr = lr.predict(X)
+calculate_metrics(y, pred_lr)
+plot_actual_vs_predicted(y, pred_lr, 'Linear Regression')
 
-# svr = SVR()
-# params = {'C': [1, 10, 100, 1000],'kernel': ['rbf'], 'gamma': [1, 10, 100, 1000]}
-# grid = GridSearchCV(SVR(), params, refit=True, verbose=3)
-# grid.fit(X_train, y_train)
-# print(grid.best_estimator_)
+# Lasso
+la = Lasso()
+la.fit(X_train, y_train)
+pred_la = la.predict(X)
+calculate_metrics(y, pred_la)
+plot_actual_vs_predicted(y, pred_la, 'Lasso')
+
+# Ridge
+ri = Ridge()
+ri.fit(X_train, y_train)
+pred_ri = ri.predict(X)
+calculate_metrics(y, pred_ri)
+plot_actual_vs_predicted(y, pred_ri, 'Ridge')
+
+svr = SVR()
+params = {'C': [1, 10, 100, 1000],'kernel': ['rbf'], 'gamma': [1, 10, 100, 1000]}
+grid = GridSearchCV(SVR(), params, refit=True, verbose=3)
+grid.fit(X_train, y_train)
+print(grid.best_estimator_)
 # SVR
 svr = SVR(kernel='rbf', C=100, gamma=0.0001)
 svr.fit(X_train, y_train)
@@ -69,8 +69,8 @@ pred_svr = svr.predict(X)
 calculate_metrics(y, pred_svr)
 plot_actual_vs_predicted(y, pred_svr, 'SVR')
 
-# #C=1000,gamma=0.1;C=100,gamma=0.01;
-# #Predict the next ten days
+#C=1000,gamma=0.1;C=100,gamma=0.01;
+#Predict the next ten days
 future_dates = 10
 future_date_range = pd.date_range(start=gold_data.index[-1], periods=future_dates, freq='B')  # Change the frequency to 'B'
 X_future = np.arange(len(gold_data), len(gold_data) + future_dates).reshape(-1, 1)
