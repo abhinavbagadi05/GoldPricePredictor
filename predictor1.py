@@ -69,20 +69,23 @@ pred_svr = svr.predict(X)
 calculate_metrics(y, pred_svr)
 plot_actual_vs_predicted(y, pred_svr, 'SVR')
 
-#C=1000,gamma=0.1;C=100,gamma=0.01;
-#Predict the next ten days
+# Predict the next ten days
 future_dates = 10
-future_date_range = pd.date_range(start=gold_data.index[-1], periods=future_dates, freq='B')  # Change the frequency to 'B'
+future_date_range = pd.date_range(start=gold_data.index[-1], periods=future_dates + 1, freq='B')  # Change the frequency to 'B'
 X_future = np.arange(len(gold_data), len(gold_data) + future_dates).reshape(-1, 1)
 pred_svr_future = svr.predict(X_future)
 
 # Combine historical and future dates
 combined_date_range = gold_data.index.union(future_date_range)
 
-# Create a DataFrame to store results
+# Ensure lengths match
+assert len(y) == len(pred_svr)
+assert len(np.nan * np.ones(len(pred_svr_future))) == len(pred_svr_future)
+
+# Create DataFrame
 predictions_df = pd.DataFrame({
     'Date': combined_date_range,
-    'Actual Price': np.concatenate([y, np.nan * np.ones(future_dates)]),
+    'Actual Price': np.concatenate([y, np.nan * np.ones(len(pred_svr_future))]),
     'Predicted Price': np.concatenate([pred_svr, pred_svr_future]),
 })
 
